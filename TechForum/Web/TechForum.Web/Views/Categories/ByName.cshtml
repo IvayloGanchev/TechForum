@@ -1,0 +1,30 @@
+﻿@model TechForum.Web.ViewModels.Categories.CategoryViewModel
+@{
+    this.ViewData["Title"] = Model.Title;
+}
+<div class="text-center">
+    <h1 class="display-3">@Model.Title</h1>
+</div>
+<div class="alert alert-info">@Model.Description</div>
+@foreach (var post in Model.Posts)
+{
+    <div class="media-body">
+        <h4 class="media-heading">@post.Title</h4>
+        <p>@post.Preview</p>
+        <ul class="list-inline list-unstyled text-right">
+            <li class="list-inline-item">
+                <i class="fas fa-user"></i> @post.AuthorUserName
+            </li>
+            <li class="list-inline-item">
+                <i class="fas fa-calendar-alt"></i> @post.CreatedOn
+            </li>
+            <li class="list-inline-item">
+                <i class="fas fa-comment-dots"></i> @post.CommentsCount comments
+            </li>
+            <li class="list-inline-item">
+                <i class="fas fa-share-alt"></i> Share
+            </li>
+
+        </ul>
+    </div>
+}

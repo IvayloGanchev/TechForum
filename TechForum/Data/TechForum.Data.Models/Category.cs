@@ -5,12 +5,13 @@ using TechForum.Data.Common.Models;
 
 namespace TechForum.Data.Models
 {
-   public class Category : BaseDeletableModel<int>
+    public class Category : BaseDeletableModel<int>
     {
         public Category()
         {
             this.Posts = new HashSet<Post>();
         }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

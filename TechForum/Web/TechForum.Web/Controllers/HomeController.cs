@@ -2,32 +2,24 @@
 {
     using System.Diagnostics;
 
-    using TechForum.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
-    using TechForum.Data;
+    using TechForum.Services.Data;
+    using TechForum.Web.ViewModels;
     using TechForum.Web.ViewModels.Home;
-    using System.Linq;
 
     public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly ICategoriesService categoriesService;
 
-        public HomeController(ApplicationDbContext dbContext)
+        public HomeController(ICategoriesService categoriesService)
         {
-            this.dbContext = dbContext;
+            this.categoriesService = categoriesService;
         }
 
         public IActionResult Index()
         {
             var viewModel = new IndexViewModel();
-            var categories = this.dbContext.Categories.Select(x => new IndexCategoryViewModel
-            {
-                Description = x.Description,
-                ImageUrl = x.ImageUrl,
-                Name = x.Name,
-                Title = x.Title,
-            }).ToList();
+            var categories = this.categoriesService.GetAll<IndexCategoryViewModel>();
 
             viewModel.Categories = categories;
             return this.View(viewModel);

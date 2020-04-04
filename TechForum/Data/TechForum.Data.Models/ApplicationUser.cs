@@ -4,9 +4,8 @@ namespace TechForum.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using TechForum.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using TechForum.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -24,6 +23,7 @@ namespace TechForum.Data.Models
         public string LastName { get; set; }
 
         public string City { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
