@@ -20,7 +20,9 @@ namespace TechForum.Web.ViewModels.Posts
 
         public string Content { get; set; }
 
-        public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
+        private readonly HtmlSanitizer sanitizer = new HtmlSanitizer();
+
+        public string SanitizedContent => Sanitize(this.Content);
 
         public string AuthorUserName { get; set; }
 
@@ -32,6 +34,14 @@ namespace TechForum.Web.ViewModels.Posts
               {
                   options.MapFrom(p => p.Votes.Sum(v => (int)v.VoteType));
               });
+        }
+
+        private string Sanitize(string content)
+        {
+            sanitizer.AllowedTags.Add("iframe");
+
+            return this.sanitizer.Sanitize(content);
+
         }
     }
 }
