@@ -1,0 +1,79 @@
+﻿@model TechForum.Web.ViewModels.Posts.PostViewModel
+@{
+    this.ViewData["Title"] = Model.Title;
+}
+
+<h1>@Model.Title</h1>
+
+
+<div class="container-fluid mt-100">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="media flex-wrap w-100 align-items-center">
+                        <img src="https://scontent-sof1-1.xx.fbcdn.net/v/t1.0-1/p160x160/83334671_2772811562835049_3057160732064874496_o.jpg?_nc_cat=110&_nc_sid=dbb9e7&_nc_eui2=AeE_08v_NIkDAdyWdOjRXvHXnZFezIqrz8mdkV7MiqvPyXN7aoN30f-2VWLoghnbbnZEadR9ksS5rABN6mvpv2bY&_nc_oc=AQnWZy0Z0WS_XV9xoe0afrlhST1a7-gxNgUwzpFujkx7h45I6zJ8ruYDrwU8cpxizog&_nc_ht=scontent-sof1-1.xx&_nc_tp=6&oh=a6d9831e5e49602852b26fc4f877f721&oe=5EACC540" width="50  " class="d-block ui-w-40 rounded-circle" alt="">
+                        <div class="media-body ml-3">
+                            @Model.AuthorUserName
+                            <div class="text-muted small">@Model.CreatedOn</div>
+                        </div>
+                        <div class="text-muted small ml-3">
+                            <form id="votesForm" method="post"></form>
+                                <div>
+                                    <a href="#" onclick="sendVote(@Model.Id, true)">
+                                        <i class="fas fa-chevron-up"></i>
+                                    </a>
+                                </div>
+
+
+                                <div id="count">@Model.VotesCount</div>
+                                <a href="#" onclick="sendVote(@Model.Id, false)">
+                                    <div><i class="fas fa-chevron-down"></i></div>
+                                </a>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>
+                        @Html.Raw(Model.SanitizedContent)
+                    </p>
+                </div>
+                <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
+                    <div class="px-4 pt-3">
+                        <i class="fa fa-heart text-danger"></i>&nbsp; <span class="align-middle">0</span>  <span class="text-muted d-inline-flex align-items-center align-middle ml-4">
+                            <i class="fa fa-eye text-muted fsize-3"></i>&nbsp; <span class="align-middle">0</span>
+                        </span>
+                    </div>
+                    <div class="px-4 pt-3"> <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp; Reply</button> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+
+        function sendVote(postId, isUpVote) {
+            var token = $("#votesForm input[name=__RequestVerificationToken]").val();
+            var json = {
+                postId: postId, isUpVote: isUpVote, __RequestVerificationToken:token
+            }
+
+            $.ajax({
+                url: "/api/votes",
+                type: "POST",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {"X-CSRF-TOKEN": token},
+                success: function (data) {
+                    $("#count").html(data.votesCount);
+
+                }
+            })
+        }
+    </script>
+}
