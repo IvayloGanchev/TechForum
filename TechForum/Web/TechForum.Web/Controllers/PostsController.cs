@@ -20,18 +20,24 @@
         private readonly IPostsService postService;
         private readonly ICategoriesService categoriesService;
 
-        public PostsController(UserManager<ApplicationUser> userManager, IPostsService postService, ICategoriesService categoriesService)
+        public PostsController(UserManager<ApplicationUser> userManager, IPostsService postsService, ICategoriesService categoriesService)
         {
 
             this.userManager = userManager;
-            this.postService = postService;
+            this.postService = postsService;
             this.categoriesService = categoriesService;
         }
 
 
         public IActionResult ById(int id)
         {
-            return this.View();
+            var postViewModel = this.postService.GetById<PostViewModel>(id);
+
+            if(postViewModel == null)
+            {
+                return this.NotFound();
+            }
+            return this.View(postViewModel);
         }
 
         [Authorize]

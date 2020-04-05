@@ -6,7 +6,7 @@
     using TechForum.Data.Models;
     using TechForum.Services.Mapping;
 
-    public class CategoryViewModel :IMapFrom<Category>
+    public class CategoryViewModel : IMapFrom<Category>
     {
 
         public int Id { get; set; }
