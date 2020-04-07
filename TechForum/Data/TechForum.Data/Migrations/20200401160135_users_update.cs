@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace TechForum.Data.Migrations
+﻿namespace TechForum.Data.Migrations
 {
-    public partial class users_update : Migration
+    using Microsoft.EntityFrameworkCore.Migrations;
+
+    public partial class Users_update : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

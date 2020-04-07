@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TechForum.Data.Models;
-using TechForum.Services.Data;
-using TechForum.Web.ViewModels.Votes;
-
-namespace TechForum.Web.Controllers
+﻿namespace TechForum.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using TechForum.Data.Models;
+    using TechForum.Services.Data;
+    using TechForum.Web.ViewModels.Votes;
+
     [ApiController]
     [Route("api/[controller]")]
     public class VotesController : ControllerBase
@@ -33,7 +31,6 @@ namespace TechForum.Web.Controllers
 
             var votes = this.voteService.GetVotes(input.PostId);
             return new VoteResponseModel { VotesCount = votes };
-
         }
     }
 }

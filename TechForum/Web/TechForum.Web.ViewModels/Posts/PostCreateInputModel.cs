@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace TechForum.Web.ViewModels.Posts
+﻿namespace TechForum.Web.ViewModels.Posts
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class PostCreateInputModel
     {
         [Required]

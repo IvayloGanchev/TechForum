@@ -1,9 +1,8 @@
 ﻿namespace TechForum.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using TechForum.Data.Models;
     using TechForum.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

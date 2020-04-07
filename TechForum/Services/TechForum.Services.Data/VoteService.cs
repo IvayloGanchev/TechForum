@@ -1,10 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using TechForum.Data.Common.Models;
-using TechForum.Data.Common.Repositories;
-
-namespace TechForum.Services.Data
+﻿namespace TechForum.Services.Data
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using TechForum.Data.Common.Models;
+    using TechForum.Data.Common.Repositories;
+
     public class VoteService : IVoteService
     {
         private readonly IRepository<Vote> votesRepository;
@@ -16,7 +17,7 @@ namespace TechForum.Services.Data
 
         public int GetVotes(int postId)
         {
-            var votes = this.votesRepository.All().Where(X => X.PostId == postId).Sum(x => (int)x.VoteType);
+            var votes = this.votesRepository.All().Where(x => x.PostId == postId).Sum(x => (int)x.VoteType);
 
             return votes;
         }
@@ -27,7 +28,6 @@ namespace TechForum.Services.Data
             if (vote != null)
             {
                 vote.VoteType = isUpVote ? VoteType.UpVote : VoteType.DownVote;
-
             }
             else
             {
@@ -40,7 +40,7 @@ namespace TechForum.Services.Data
                 await this.votesRepository.AddAsync(vote);
             }
 
-           await  this.votesRepository.SaveChangesAsync();
+            await this.votesRepository.SaveChangesAsync();
         }
     }
 }

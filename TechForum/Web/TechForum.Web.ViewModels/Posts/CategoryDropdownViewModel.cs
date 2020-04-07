@@ -3,7 +3,7 @@
     using TechForum.Data.Models;
     using TechForum.Services.Mapping;
 
-    public class CategoryDropdownViewModel :IMapFrom<Category>
+    public class CategoryDropdownViewModel : IMapFrom<Category>
     {
         public int Id { get; set; }
 

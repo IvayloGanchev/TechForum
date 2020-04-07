@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TechForum.Data.Common.Models;
-
-namespace TechForum.Data.Models
+﻿namespace TechForum.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using TechForum.Data.Common.Models;
+
     public class Category : BaseDeletableModel<int>
     {
         public Category()
@@ -23,7 +24,6 @@ namespace TechForum.Data.Models
         public string ImageUrl { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
-
 
     }
 }

@@ -1,16 +1,16 @@
-﻿using AutoMapper;
-using Ganss.XSS;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TechForum.Data.Models;
-using TechForum.Services.Mapping;
-
-namespace TechForum.Web.ViewModels.Posts
+﻿namespace TechForum.Web.ViewModels.Posts
 {
+    using System;
+    using System.Linq;
+
+    using AutoMapper;
+    using Ganss.XSS;
+    using TechForum.Data.Models;
+    using TechForum.Services.Mapping;
+
     public class PostViewModel : IMapFrom<Post>, IMapTo<Post>, IHaveCustomMappings
     {
+        private readonly HtmlSanitizer sanitizer = new HtmlSanitizer();
 
         public int Id { get; set; }
 
@@ -20,9 +20,7 @@ namespace TechForum.Web.ViewModels.Posts
 
         public string Content { get; set; }
 
-        private readonly HtmlSanitizer sanitizer = new HtmlSanitizer();
-
-        public string SanitizedContent => Sanitize(this.Content);
+        public string SanitizedContent => this.Sanitize(this.Content);
 
         public string AuthorUserName { get; set; }
 
@@ -38,7 +36,7 @@ namespace TechForum.Web.ViewModels.Posts
 
         private string Sanitize(string content)
         {
-            sanitizer.AllowedTags.Add("iframe");
+            this.sanitizer.AllowedTags.Add("iframe");
 
             return this.sanitizer.Sanitize(content);
 

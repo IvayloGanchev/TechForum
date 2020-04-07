@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TechForum.Services.Data
+﻿namespace TechForum.Services.Data
 {
+    using System.Threading.Tasks;
+
     public interface IVoteService
     {
         Task VoteAsync(int postId, string userId, bool isUpVote);

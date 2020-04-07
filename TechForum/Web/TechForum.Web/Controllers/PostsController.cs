@@ -22,21 +22,20 @@
 
         public PostsController(UserManager<ApplicationUser> userManager, IPostsService postsService, ICategoriesService categoriesService)
         {
-
             this.userManager = userManager;
             this.postService = postsService;
             this.categoriesService = categoriesService;
         }
 
-
         public IActionResult ById(int id)
         {
             var postViewModel = this.postService.GetById<PostViewModel>(id);
 
-            if(postViewModel == null)
+            if (postViewModel == null)
             {
                 return this.NotFound();
             }
+
             return this.View(postViewModel);
         }
 

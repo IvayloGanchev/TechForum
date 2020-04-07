@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace TechForum.Data.Migrations
+﻿namespace TechForum.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddedVotes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -41,7 +42,7 @@ namespace TechForum.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     PostId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: false),
-                    VoteType = table.Column<int>(nullable: false)
+                    VoteType = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {

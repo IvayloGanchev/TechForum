@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using TechForum.Data.Common.Models;
-
-namespace TechForum.Data.Models
+﻿namespace TechForum.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Text;
+
+    using TechForum.Data.Common.Models;
+
     public class Post : BaseDeletableModel<int>
     {
         public Post()
@@ -33,7 +34,5 @@ namespace TechForum.Data.Models
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Vote> Votes { get; set; }
-
-
     }
 }

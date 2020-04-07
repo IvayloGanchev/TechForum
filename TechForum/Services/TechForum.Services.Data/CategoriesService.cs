@@ -29,11 +29,16 @@
             return query.To<T>().ToList();
         }
 
-        public T GetByName<T>(string name)
+        public T GetByName<T>(string name, int? take = null, int skip = 0)
         {
-            var category = this.categoriesRepository.All().Where(x => x.Name == name).To<T>().FirstOrDefault();
+            var category = this.categoriesRepository.All().Where(x => x.Name.Replace("-", " ") == name.Replace("-", " ")).To<T>().FirstOrDefault();
 
             return category;
+        }
+
+        public T GetForumPost<T>(int categoryId, int? take = null, int skip = 0)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using TechForum.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using TechForum.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

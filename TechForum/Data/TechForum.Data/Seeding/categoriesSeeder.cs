@@ -1,5 +1,4 @@
-﻿
-namespace TechForum.Data.Seeding
+﻿namespace TechForum.Data.Seeding
 {
     using System;
     using System.Collections.Generic;
@@ -20,7 +19,7 @@ namespace TechForum.Data.Seeding
 
             var categories = new List<string>()
             {
-                "Gaming", "Cars", "Programming", "Industrial", "Coronavirus", "Techno", "Education"
+                "Gaming", "Cars", "Programming", "Industrial", "Coronavirus", "Techno", "Education",
             };
 
             foreach (var cat in categories)

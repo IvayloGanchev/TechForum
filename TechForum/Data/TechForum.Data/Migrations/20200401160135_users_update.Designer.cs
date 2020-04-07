@@ -11,7 +11,7 @@ namespace TechForum.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20200401160135_users_update")]
-    partial class users_update
+    partial class Users_update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

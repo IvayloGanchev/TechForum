@@ -3,9 +3,8 @@ namespace TechForum.Data.Models
 {
     using System;
 
-    using TechForum.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using TechForum.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

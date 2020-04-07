@@ -3,12 +3,12 @@
     using System;
     using System.Net;
     using System.Text.RegularExpressions;
+
     using TechForum.Data.Models;
     using TechForum.Services.Mapping;
 
     public class PostInCategoryViewModel : IMapFrom<Post>
     {
-
         public int Id { get; set; }
 
         public DateTime CreatedOn { get; set; }
@@ -31,6 +31,5 @@
         public string AuthorUserName { get; set; }
 
         public int CommentsCount { get; set; }
-
     }
 }
