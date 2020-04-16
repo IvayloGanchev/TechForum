@@ -20,11 +20,12 @@
         private readonly IPostsService postService;
         private readonly ICategoriesService categoriesService;
 
-        public PostsController(UserManager<ApplicationUser> userManager, IPostsService postsService, ICategoriesService categoriesService)
+        public PostsController(UserManager<ApplicationUser> userManager, IPostsService postsService, ICategoriesService categoriesService,IDeletableEntityRepository<Post> postsRepository)
         {
             this.userManager = userManager;
             this.postService = postsService;
             this.categoriesService = categoriesService;
+            this.postsRepository = postsRepository;
         }
 
         public IActionResult ById(int id)
@@ -64,5 +65,42 @@
 
             return this.RedirectToAction(nameof(this.ById), new { id = postId });
         }
+
+        //TODO CHECK IF CURRENT USER IS AUTHOR OF POST
+        [Authorize]
+        public IActionResult Edit(PostCreateInputModel input)
+        {
+            
+            var categories = this.categoriesService.GetAll<CategoryDropdownViewModel>();
+            var viewModel = new PostEditViewModel
+            {
+                Categories = categories,
+                Title = input.Title,
+                Content = input.Content,
+                CategoryId = input.CategoryId,
+                Id = input.Id,
+            };
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> SubmitEdit(PostEditInputModel input)
+        {
+            var post = this.postsRepository.All().Where(x => x.Id == input.Id).FirstOrDefault();
+
+            post.CategoryId = input.CategoryId;
+            post.Content = input.Content;
+            post.Title = input.Title;
+
+
+            this.postsRepository.Update(post);
+            await this.postsRepository.SaveChangesAsync();
+
+            return this.RedirectToAction(nameof(this.ById), new { id = post.Id });
+
+        }
+
     }
 }

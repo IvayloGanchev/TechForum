@@ -27,7 +27,7 @@
                                     <div class="text-muted small ml-3">
                                         @if (this.User.Identity.IsAuthenticated)
                                         {
-                                            <div class="px-4 pt-3"> <button type="button" class="btn btn-secondary" onclick="showCommentForm(@comment.Id)"><i class="fa fa-plus"></i>&nbsp; Answer</button> </div>
+                                            <div class="px-4 pt-3"> <button type="button" class="btn btn-primary" onclick="showCommentForm(@comment.Id)"><i class="fa fa-comment"></i>&nbsp; Answer</button> </div>
                                         }
                                     </div>
                                 </div>
@@ -81,12 +81,21 @@
                 <div class="card-body">
                     <article>
                         @Html.Raw(Model.SanitizedContent)
-                    </article>
-                    <div class="px-4 pt-3">  <button type="button" class="btn btn-primary  float-right" onclick="showCommentForm(0)"><i class="fa fa-plus"></i>&nbsp; Comment</button> </div>
-                    <div class="clearfix"></div>
-                    <hr />
-                    @{DisplayComments(null);}
+
+                        @{DisplayComments(null);}
                 </div>
+                </article>
+                <form class="btn-group btn-group-vertical" asp-area="" asp-controller="Posts" asp-action="Edit">
+                    <input type="hidden" name="Title" value="@Model.Title" />
+                    <input type="hidden" name="Content" value="@Model.Content" />
+                    <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <button type="button" class="btn btn-primary " onclick="showCommentForm(0)"><i class="fa fa-comment"></i>&nbsp; Comment</button>
+                   @if (this.User.Identity.Name == Model.AuthorUserName) { <button type="submit" class="btn btn-primary " style="margin-left: -0px"><i class="fa fa-edit"></i>&nbsp; Edit post</button>}
+                    <div class="clearfix"></div>
+
+                </form>
+
             </div>
         </div>
     </div>
@@ -111,7 +120,7 @@
     <script>
         function showCommentForm(parentId) {
             $("#AddCommentForm input[name='ParentId']").val(parentId);
-            $("#AddCommentForm").show();
+            $("#AddCommentForm").toggle();
             $([document.documentElement, document.body]).animate({
                 scrollTop: $("#AddCommentForm").offset().top
             }, 1000);

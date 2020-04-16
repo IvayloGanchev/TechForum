@@ -3,9 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using TechForum.Data.Models;
+    using System.Text;
 
-    public class PostCreateInputModel
+    using TechForum.Data.Models;
+    using TechForum.Services.Mapping;
+
+    public class PostEditViewModel 
     {
         public int Id { get; set; }
 

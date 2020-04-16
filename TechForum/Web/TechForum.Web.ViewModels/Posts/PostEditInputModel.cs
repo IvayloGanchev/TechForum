@@ -1,13 +1,16 @@
-﻿namespace TechForum.Web.ViewModels.Posts
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using TechForum.Data.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using TechForum.Data.Models;
+using TechForum.Services.Mapping;
 
-    public class PostCreateInputModel
+namespace TechForum.Web.ViewModels.Posts
+{
+   public class PostEditInputModel : IMapTo<Post>, IMapFrom<Post>
     {
         public int Id { get; set; }
+
 
         [Required]
         public string Title { get; set; }

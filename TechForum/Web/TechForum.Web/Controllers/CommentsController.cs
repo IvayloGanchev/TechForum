@@ -1,7 +1,7 @@
 ﻿namespace TechForum.Web.Controllers
 {
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using TechForum.Data.Models;
@@ -20,6 +20,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateCommentInputModel input)
         {
             var parentId = input.ParentId == 0 ? (int?)null : input.ParentId;
