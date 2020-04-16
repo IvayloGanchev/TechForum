@@ -90,11 +90,14 @@
                     <input type="hidden" name="Content" value="@Model.Content" />
                     <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
                     <input type="hidden" name="Id" value="@Model.Id" />
-                    <button type="button" class="btn btn-primary " onclick="showCommentForm(0)"><i class="fa fa-comment"></i>&nbsp; Comment</button>
-                   @if (this.User.Identity.Name == Model.AuthorUserName) { <button type="submit" class="btn btn-primary " style="margin-left: -0px"><i class="fa fa-edit"></i>&nbsp; Edit post</button>}
-                    <div class="clearfix"></div>
-
+                    <button type="button" class="btn btn-primary " onclick="showCommentForm(0)" style="margin-left: -0px"><i class="fa fa-comment"></i>&nbsp; Comment</button>
+                    @if (this.User.Identity.Name == Model.AuthorUserName)
+                    {<button type="submit" class="btn btn-primary " style="margin-left: -0px"><i class="fa fa-edit"></i>&nbsp; Edit post</button>}
                 </form>
+                @if (this.User.Identity.Name == Model.AuthorUserName)
+                {<button type="button" class="btn btn-danger " style="margin-left: -0px" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-eraser"></i>&nbsp; Delete post</button>}
+                
+
 
             </div>
         </div>
@@ -113,6 +116,31 @@
             <input type="submit" class="btn btn-primary" value="Add Comment" />
         </div>
     </form>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               Are you sure you want to delete this post ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form class="btn-group btn-group-vertical" asp-area="" asp-controller="Posts" asp-action="Delete">
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="CategoryId" value="@Model.Category.Id" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <div class="clearfix"></div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts

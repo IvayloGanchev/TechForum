@@ -9,6 +9,6 @@
 
         T GetByName<T>(string name, int? take = null, int skip = 0);
 
-       
+      
     }
 }

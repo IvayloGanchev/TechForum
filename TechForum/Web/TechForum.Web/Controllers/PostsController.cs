@@ -20,7 +20,7 @@
         private readonly IPostsService postService;
         private readonly ICategoriesService categoriesService;
 
-        public PostsController(UserManager<ApplicationUser> userManager, IPostsService postsService, ICategoriesService categoriesService,IDeletableEntityRepository<Post> postsRepository)
+        public PostsController(UserManager<ApplicationUser> userManager, IPostsService postsService, ICategoriesService categoriesService, IDeletableEntityRepository<Post> postsRepository)
         {
             this.userManager = userManager;
             this.postService = postsService;
@@ -70,7 +70,7 @@
         [Authorize]
         public IActionResult Edit(PostCreateInputModel input)
         {
-            
+
             var categories = this.categoriesService.GetAll<CategoryDropdownViewModel>();
             var viewModel = new PostEditViewModel
             {
@@ -93,12 +93,23 @@
             post.CategoryId = input.CategoryId;
             post.Content = input.Content;
             post.Title = input.Title;
-
-
             this.postsRepository.Update(post);
             await this.postsRepository.SaveChangesAsync();
 
             return this.RedirectToAction(nameof(this.ById), new { id = post.Id });
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Delete(PostEditInputModel input)
+        {
+            var post = this.postsRepository.All().Where(x => x.Id == input.Id).FirstOrDefault();
+            var category = this.categoriesService.GetAll<CategoryDropdownViewModel>().Where(x => x.Id == input.CategoryId).FirstOrDefault().Name;
+            this.postsRepository.Delete(post);
+            await this.postsRepository.SaveChangesAsync();
+
+            return this.Redirect($"/c/{category}");
 
         }
 
