@@ -88,6 +88,12 @@
         [Authorize]
         public async Task<IActionResult> SubmitEdit(PostEditInputModel input)
         {
+            if
+                (input.AuthorUserName != this.User.Identity.Name)
+            {
+                return this.BadRequest();
+            }
+
             var post = this.postsRepository.All().Where(x => x.Id == input.Id).FirstOrDefault();
 
             post.CategoryId = input.CategoryId;
@@ -102,8 +108,14 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Delete(PostEditInputModel input)
+        public async Task<IActionResult> Delete(PostDeleteInputModel input)
         {
+            if
+                (input.AuthorUserName != this.User.Identity.Name)
+            {
+                return this.BadRequest();
+            }
+
             var post = this.postsRepository.All().Where(x => x.Id == input.Id).FirstOrDefault();
             var category = this.categoriesService.GetAll<CategoryDropdownViewModel>().Where(x => x.Id == input.CategoryId).FirstOrDefault().Name;
             this.postsRepository.Delete(post);

@@ -28,7 +28,27 @@
             };
 
             await this.commentsRepository.AddAsync(comment);
-            await this.commentsRepository.SaveChangesAsync();        }
+            await this.commentsRepository.SaveChangesAsync();
+        }
+
+        public async Task Delete(int postid, int commentId)
+        {
+            var comment = this.commentsRepository.All().Where(x => x.Id == commentId).FirstOrDefault();
+
+            this.commentsRepository.Delete(comment);
+            await this.commentsRepository.SaveChangesAsync();
+
+        }
+
+        public async Task Edit(int commentId, string content)
+        {
+            var comment = this.commentsRepository.All().Where(x => x.Id == commentId).FirstOrDefault();
+
+            comment.Content = content;
+
+            this.commentsRepository.Update(comment);
+            await this.commentsRepository.SaveChangesAsync();
+        }
 
         public bool IsInPostId(int commentId, int postId)
         {
@@ -37,5 +57,6 @@
             return commentPostId == postId;
 
         }
+
     }
 }

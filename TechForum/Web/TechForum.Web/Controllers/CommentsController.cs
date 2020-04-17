@@ -38,5 +38,33 @@
 
             return this.RedirectToAction("ById", "Posts", new { id = input.PostId });
         }
+
+        [Authorize]
+        public async Task<IActionResult> Delete(DeleteCommentInputModel input)
+        {
+            if
+                (input.AuthorUserName != this.User.Identity.Name)
+            {
+                return this.BadRequest();
+            }
+
+            await this.commentsService.Delete(input.PostId, input.Id);
+
+            return this.RedirectToAction("ById", "Posts", new { id = input.PostId });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditCommentInputModel input)
+        {
+            if (input.AuthorUserName != this.User.Identity.Name)
+            {
+                return this.BadRequest();
+            }
+
+            await this.commentsService.Edit(input.Id, input.Content);
+
+            return this.RedirectToAction("ById", "Posts", new { id = input.PostId });
+        }
     }
 }

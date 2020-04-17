@@ -25,5 +25,7 @@
         public int CategoryId { get; set; }
 
         public IEnumerable<CategoryDropdownViewModel> Categories { get; set; }
+
+        public string AuthorUserName { get; set; }
     }
 }
