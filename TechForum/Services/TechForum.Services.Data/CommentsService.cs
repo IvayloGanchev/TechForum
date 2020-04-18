@@ -34,10 +34,12 @@
         public async Task Delete(int postid, int commentId)
         {
             var comment = this.commentsRepository.All().Where(x => x.Id == commentId).FirstOrDefault();
-
-            this.commentsRepository.Delete(comment);
-            await this.commentsRepository.SaveChangesAsync();
-
+            if (comment != null)
+            {
+                await this.RemoveChildren(commentId);
+                this.commentsRepository.Delete(comment);
+                await this.commentsRepository.SaveChangesAsync();
+            }
         }
 
         public async Task Edit(int commentId, string content)
@@ -58,5 +60,17 @@
 
         }
 
+        public async Task RemoveChildren(int commentId)
+        {
+            var children = this.commentsRepository.All().Where(x => x.ParentId == commentId).ToList();
+            foreach (var childComment in children)
+            {
+                await this.RemoveChildren(childComment.Id);
+                this.commentsRepository.Delete(childComment);
+                await this.commentsRepository.SaveChangesAsync();
+
+            }
+
+        }
     }
 }

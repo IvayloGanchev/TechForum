@@ -54,9 +54,10 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // Needed for Identity models configuration
-            base.OnModelCreating(builder);
 
+            
+            base.OnModelCreating(builder);
+            
             this.ConfigureUserIdentityRelations(builder);
 
             EntityIndexesConfiguration.Configure(builder);

@@ -1,6 +1,6 @@
 ﻿@model TechForum.Web.ViewModels.Posts.PostViewModel
 @using TechForum.Web.ViewModels.Posts
-using System.Text.Json.Serialization
+@using System.Text.Json.Serialization
 @{
 
     this.ViewData["Title"] = Model.Title;
@@ -31,12 +31,15 @@ using System.Text.Json.Serialization
                                     <div class="btn-group-vertical">
                                         @if (this.User.Identity.IsAuthenticated)
                                         {
-                                            <button type="button" class="btn btn-light" onclick="showCommentForm(@comment.Id,)"><i class="fa fa-comment"></i>&nbsp; Reply</button>
+                                            <button type="button" class="btn btn-light" onclick="showCommentForm(@comment.Id)"><i class="fa fa-comment"></i>&nbsp; Reply</button>
                                         }
                                         @if ((this.User.Identity.Name == Model.AuthorUserName) || (comment.AuthorUserName == this.User.Identity.Name))
                                         {
+                                            if (comment.AuthorUserName == this.User.Identity.Name)
+                                            {
+                                                <button type="button" class="btn btn-light" onclick="showEditCommentForm(@comment.Id,@Json.Serialize(comment).ToString())"><i class="fa fa-comment"></i>&nbsp; Edit</button>
+                                            }
 
-                                            <button type="button" class="btn btn-light" onclick="showEditCommentForm(@comment.Id,@Json.Serialize(comment).ToString())"><i class="fa fa-comment"></i>&nbsp; Edit</button>
 
                                             <a href='@Url.Action("Delete", "Comments", new { Id = comment.Id, PostId = Model.Id, ParentId = comment.ParentId, AuthorUserName = comment.AuthorUserName} )'>
 
@@ -60,9 +63,10 @@ using System.Text.Json.Serialization
         }
     }
 }
-
-<h1>@Model.Title</h1>
-
+<div>
+    <a href="/c/@Model.Category.Name">Back</a>
+    <div class="align-center"><h1> @Model.Title</h1></div>
+</div>
 
 <div class="container-fluid mt-100">
     <div class="row">
@@ -168,7 +172,7 @@ using System.Text.Json.Serialization
     <form asp-controller="Comments" asp-action="Edit" method="post" id="EditCommentForm" style="display: none">
         <input type="hidden" name="PostId" value="@this.Model.Id" />
         <input type="hidden" asp-for="Id" name="Id" />
-        <input type="hidden" name="AuthorUserName" value="@Model.AuthorUserName"/>
+        <input type="hidden" name="AuthorUserName" value="@Model.AuthorUserName" />
 
         <div>
             <label for="Content"></label>
@@ -186,7 +190,7 @@ using System.Text.Json.Serialization
     <script>
 
         function showCommentForm(parentId) {
-            $("#AddCommentForm input[name='Id']").val(parentId);
+            $("#AddCommentForm input[name='ParentId']").val(parentId);
             $("#AddCommentForm").toggle();
             $([document.documentElement, document.body]).animate({
                 scrollTop: $("#AddCommentForm").offset().top

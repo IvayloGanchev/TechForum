@@ -57,7 +57,7 @@
         [HttpPost]
         public async Task<IActionResult> Edit(EditCommentInputModel input)
         {
-            if (input.AuthorUserName != this.User.Identity.Name)
+              if (input.AuthorUserName != this.User.Identity.Name)
             {
                 return this.BadRequest();
             }

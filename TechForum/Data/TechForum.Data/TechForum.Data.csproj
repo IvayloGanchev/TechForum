@@ -11,6 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200418101217_cascadeDelete.cs" />
+    <Compile Remove="Migrations\20200418101217_cascadeDelete.Designer.cs" />
+    <Compile Remove="Migrations\20200418102309_cascade.cs" />
+    <Compile Remove="Migrations\20200418102309_cascade.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
 
