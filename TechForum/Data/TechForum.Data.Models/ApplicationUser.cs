@@ -18,6 +18,8 @@ namespace TechForum.Data.Models
             this.Posts = new HashSet<Post>();
         }
 
+        public DateTime DateOfBirth { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

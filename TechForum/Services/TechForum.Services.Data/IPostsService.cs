@@ -13,5 +13,7 @@
 
         int GetCountByCategoryId(int categoryId);
 
-      }
+        IEnumerable<T> GetByUserId<T>(string userId);
+
+    }
 }

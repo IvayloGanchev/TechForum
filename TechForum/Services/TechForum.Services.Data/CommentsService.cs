@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using TechForum.Data.Common.Repositories;
     using TechForum.Data.Models;
+    using TechForum.Services.Mapping;
 
     public class CommentsService : ICommentsService
     {
@@ -50,6 +51,13 @@
 
             this.commentsRepository.Update(comment);
             await this.commentsRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetByUserId<T>(string userId)
+        {
+            var query = this.commentsRepository.All().Where(x => x.AuthorId == userId);
+
+            return query.To<T>().ToList();
         }
 
         public bool IsInPostId(int commentId, int postId)

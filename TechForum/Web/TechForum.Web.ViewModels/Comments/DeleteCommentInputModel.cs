@@ -3,11 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using TechForum.Data.Models;
 
     public class DeleteCommentInputModel
     {
 
         public int Id { get; set; }
+
+        public string PostAuthorUserName { get; set; }
 
         public int PostId { get; set; }
 

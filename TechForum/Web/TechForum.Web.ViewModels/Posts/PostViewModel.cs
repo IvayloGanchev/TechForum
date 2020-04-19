@@ -3,7 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Net;
+    using System.Text.RegularExpressions;
     using AutoMapper;
     using Ganss.XSS;
     using TechForum.Data.Models;
@@ -30,6 +31,19 @@
         public Category Category { get; set; }
 
         public int CategoryId { get; set; }
+
+        public string Preview
+        {
+            get
+            {
+                var content = WebUtility.HtmlDecode(Regex.Replace(this.Content, @"<[^>]+>", string.Empty));
+                return content?.Length > 300
+                    ? content?.Substring(0, 300) + "..."
+                    : content;
+            }
+        }
+
+        public int CommentsCount { get; set; }
 
         public IEnumerable<PostCommentViewModel> Comments { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TechForum.Services.Data
 {
@@ -11,5 +12,7 @@ namespace TechForum.Services.Data
         Task Delete(int postid, int commentId);
 
         Task Edit(int commentId, string content);
+
+        IEnumerable<T> GetByUserId<T>(string userId);
     }
 }

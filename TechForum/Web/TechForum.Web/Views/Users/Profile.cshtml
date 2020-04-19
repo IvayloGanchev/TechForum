@@ -1,0 +1,138 @@
+﻿@model TechForum.Web.ViewModels.User.UserProfileViewModel
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="card-title mb-4">
+                        <div class="d-flex justify-content-start">
+                            <div class="image-container">
+                                <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                
+                                
+                            </div>
+                            <div class="userData ml-3">
+                                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">@Model.UserName</a></h2>
+                                <h6 class="d-block">@Model.PostsCount Posts</h6>
+                                <h6 class="d-block"><a href="javascript:void(0)">@Model.CommentsCount</a> Comments</h6>
+                                <div class="middle">
+                                    @if (this.User.Identity.IsAuthenticated && this.User.Identity.Name == Model.UserName)
+                                    {
+                                        <a href='@Url.Action("Account", "Identity")/Manage'>
+
+                                            <button type="button" class="btn btn-info" id="btnEditProfile" value="Edit Profile"><i class="fa fa-user-edit"></i> Edit Profile</button>
+
+
+                                        </a>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="ml-auto">
+                                <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="ForumPosts-tab" data-toggle="tab" href="#ForumPosts" role="tab" aria-controls="ForumPosts" aria-selected="false">Forum posts by @Model.UserName</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content ml-1" id="myTabContent">
+                                <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Full Name</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            @Model.FirstName @Model.LastName
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Age</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            @Model.Age
+                                        </div>
+                                    </div>
+                                    <hr />
+
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">City</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            @Model.City
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Something</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            Something
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Something</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            Something
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                </div>
+                                <div class="tab-pane fade" id="ForumPosts" role="tabpanel" aria-labelledby="ForumPosts-tab">
+
+                                    @foreach (var post in Model.Posts)
+                                    {
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a></h4>
+                                            <p>@post.Preview</p>
+                                            <ul class="list-inline list-unstyled text-right">
+                                                <li class="list-inline-item">
+                                                    <i class="fas fa-user"></i> @post.AuthorUserName
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <i class="fas fa-calendar-alt"></i> @post.CreatedOn
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <i class="fas fa-comment-dots"></i> @post.CommentsCount comments
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <i class="fas fa-share-alt"></i> Share
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

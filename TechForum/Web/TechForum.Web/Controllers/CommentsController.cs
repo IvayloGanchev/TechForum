@@ -43,7 +43,7 @@
         public async Task<IActionResult> Delete(DeleteCommentInputModel input)
         {
             if
-                (input.AuthorUserName != this.User.Identity.Name)
+                (input.AuthorUserName != this.User.Identity.Name && input.PostAuthorUserName != this.User.Identity.Name)
             {
                 return this.BadRequest();
             }
@@ -57,7 +57,7 @@
         [HttpPost]
         public async Task<IActionResult> Edit(EditCommentInputModel input)
         {
-              if (input.AuthorUserName != this.User.Identity.Name)
+            if (input.AuthorUserName != this.User.Identity.Name)
             {
                 return this.BadRequest();
             }

@@ -1,5 +1,6 @@
 ﻿namespace TechForum.Web.Areas.Identity.Pages.Account
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -75,6 +76,9 @@
             [Required]
             [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
             public string City { get; set; }
+
+            [Required]
+            public DateTime DateOfBirth { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -89,7 +93,7 @@
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email, FirstName = this.Input.FirstName, LastName = this.Input.LastName, City = this.Input.City };
+                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email, FirstName = this.Input.FirstName, LastName = this.Input.LastName, City = this.Input.City ,DateOfBirth = this.Input.DateOfBirth};
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
                 {

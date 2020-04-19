@@ -60,9 +60,17 @@
 
         }
 
+        public IEnumerable<T> GetByUserId<T>(string userId)
+        {
+            var query = this.postsRepository.All().Where(x => x.AuthorId == userId);
+
+            return query.To<T>().ToList();
+        }
+
         public int GetCountByCategoryId(int categoryId)
         {
             return this.postsRepository.All().Count(x => x.CategoryId == categoryId);
         }
+
     }
 }

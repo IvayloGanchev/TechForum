@@ -1,11 +1,11 @@
-﻿namespace TechForum.Web.ViewModels.Posts
-{
-    using Ganss.XSS;
-    using System;
-    
-    using TechForum.Data.Models;
-    using TechForum.Services.Mapping;
+﻿using Ganss.XSS;
+using System;
 
+using TechForum.Data.Models;
+using TechForum.Services.Mapping;
+
+namespace TechForum.Web.ViewModels.Posts
+{
     public class PostCommentViewModel : IMapFrom<Comment>
     {
         private readonly HtmlSanitizer sanitizer = new HtmlSanitizer();
