@@ -26,6 +26,8 @@
 
         public string AuthorUserName { get; set; }
 
+        public string AuthorPicture { get; set; }
+
         public int VotesCount { get; set; }
 
         public Category Category { get; set; }

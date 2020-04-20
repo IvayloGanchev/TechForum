@@ -38,6 +38,7 @@
                 Posts = this.postsService.GetByUserId<PostViewModel>(user.Id),
                 Comments = this.commentsService.GetByUserId<PostCommentViewModel>(user.Id),
                 Age = DateTime.Now.Year - user.DateOfBirth.Year,
+                Picture = user.Picture,
             };
 
             return this.View(viewModel);

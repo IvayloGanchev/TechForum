@@ -1,7 +1,7 @@
 ﻿namespace TechForum.Web
 {
     using System.Reflection;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -45,7 +45,11 @@
                         options.CheckConsentNeeded = context => true;
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
+            Account cloudinaryCredentials = new Account("dpscqebc4", "719475685325931", "PxOMUut3GlWGPP4Jyfho6fKsv0Q");
 
+            Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
+
+            services.AddSingleton(cloudinaryUtility);
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
@@ -70,6 +74,8 @@
             services.AddTransient<IPostsService, PostsService>();
             services.AddTransient<IVoteService, VoteService>();
             services.AddTransient<ICommentsService, CommentsService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

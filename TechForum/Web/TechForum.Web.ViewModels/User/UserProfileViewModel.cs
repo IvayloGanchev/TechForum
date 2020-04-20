@@ -22,6 +22,8 @@ namespace TechForum.Web.ViewModels.User
 
         public string LastName { get; set; }
 
+        public string Picture { get; set; }
+
         public string City { get; set; }
 
         public int Age { get; set; }

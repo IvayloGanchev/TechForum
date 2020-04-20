@@ -22,6 +22,8 @@ namespace TechForum.Web.ViewModels.Posts
 
         public string AuthorUserName { get; set; }
 
+        public string AuthorPicture { get; set; }
+
         private string Sanitize(string content)
         {
             this.sanitizer.AllowedTags.Add("iframe");

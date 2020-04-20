@@ -26,6 +26,8 @@ namespace TechForum.Data.Models
 
         public string City { get; set; }
 
+        public string Picture { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
