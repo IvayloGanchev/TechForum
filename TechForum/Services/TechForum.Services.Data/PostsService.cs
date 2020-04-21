@@ -72,5 +72,10 @@
             return this.postsRepository.All().Count(x => x.CategoryId == categoryId);
         }
 
+        public IEnumerable<T> Search<T>(string searchString)
+        {
+            return this.postsRepository.All().Where(p => p.Title.Contains(searchString)).To<T>().ToList();
+
+        }
     }
 }

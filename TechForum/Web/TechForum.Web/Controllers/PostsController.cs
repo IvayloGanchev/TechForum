@@ -125,5 +125,19 @@
 
         }
 
+        [HttpPost]
+        public IActionResult Search(string searchString)
+        {
+            var posts = this.postService.Search<PostInSearchViewModel>(searchString);
+            var viewModel = new SearchViewModel
+            {
+                SearchString = searchString,
+                FoundPosts = posts,
+            };
+
+            return this.View(viewModel);
+
+        }
+
     }
 }

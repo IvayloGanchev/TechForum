@@ -15,5 +15,7 @@
 
         IEnumerable<T> GetByUserId<T>(string userId);
 
+        IEnumerable<T> Search<T>(string searchString);
+
     }
 }

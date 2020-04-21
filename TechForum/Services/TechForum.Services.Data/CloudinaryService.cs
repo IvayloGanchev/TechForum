@@ -44,6 +44,5 @@ namespace TechForum.Services.Data
             return uploadResult?.SecureUri.AbsoluteUri;
         }
 
-       
     }
 }
