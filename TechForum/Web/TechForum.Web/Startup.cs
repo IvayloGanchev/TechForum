@@ -1,6 +1,7 @@
 ﻿namespace TechForum.Web
 {
     using System.Reflection;
+    using System.Threading.Tasks;
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -20,6 +21,7 @@
     using TechForum.Services.Mapping;
     using TechForum.Services.Messaging;
     using TechForum.Web.ViewModels;
+   
 
     public class Startup
     {
@@ -75,11 +77,25 @@
             services.AddTransient<IVoteService, VoteService>();
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
 
+                facebookOptions.Events = new Microsoft.AspNetCore.Authentication.OAuth.OAuthEvents()
+                {
+                    OnRemoteFailure = LoginFailureHandler =>
+                    {
+                        var authProperties = facebookOptions.StateDataFormat.Unprotect(LoginFailureHandler.Request.Query["state"]);
+                        LoginFailureHandler.Response.Redirect("/Identity/Account/Login");
+                        return Task.FromResult(0);
+                    }
+                };
+
+            });
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 

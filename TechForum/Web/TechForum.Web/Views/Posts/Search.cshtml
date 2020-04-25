@@ -5,7 +5,7 @@
 
 @if (Model.FoundPosts.Any())
 {<div class="text-center">
-    <h1 class="display-3">Searching for @Model.SearchString ...</h1>
+    <h1 class="display-3">Results for @Model.SearchString </h1>
 </div>
     @foreach (var post in Model.FoundPosts)
     {
@@ -34,4 +34,4 @@ else {
 <div class="text-center">
     <h1 class="display-3">Nothing found</h1>
 </div>
-};
+}
