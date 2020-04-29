@@ -48,11 +48,6 @@
             return query.To<T>().ToList();
         }
 
-        public IEnumerable<T> GetByCategoryId<T>(int categoryId, int skip = 0, int? take = null)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public T GetById<T>(int id)
         {
             var post = this.postsRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();

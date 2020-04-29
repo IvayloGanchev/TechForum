@@ -36,9 +36,6 @@
             return category;
         }
 
-        public T GetForumPost<T>(int categoryId, int? take = null, int skip = 0)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
