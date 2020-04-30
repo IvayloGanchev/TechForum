@@ -15,7 +15,7 @@
                             <div class="userData ml-3">
                                 <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">@Model.UserName</a></h2>
                                 <h6 class="d-block">@Model.PostsCount Posts</h6>
-                                <h6 class="d-block"><a href="javascript:void(0)">@Model.CommentsCount</a> Comments</h6>
+                                <h6 class="d-block">@Model.CommentsCount Comments</h6>
                                 <div class="middle">
                                     @if (this.User.Identity.IsAuthenticated && this.User.Identity.Name == Model.UserName)
                                     {
