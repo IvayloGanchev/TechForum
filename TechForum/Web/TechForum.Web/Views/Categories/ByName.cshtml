@@ -8,8 +8,8 @@
 
 @foreach (var post in Model.ForumPosts)
 {
-    <div class="media-body">
-        <h4 class="media-heading"><a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a></h4>
+    <div class="media-body ">
+        <h4 class="media-heading"><a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id" style="color:inherit">@post.Title </a></h4>
         <p>@post.Preview</p>
         <ul class="list-inline list-unstyled text-right">
             <li class="list-inline-item">
@@ -21,7 +21,7 @@
             <li class="list-inline-item">
                 <i class="fas fa-comment-dots"></i> @post.CommentsCount comments
             </li>
-            
+
 
         </ul>
     </div>
@@ -38,7 +38,7 @@
         else
         {
             <li class="page-item justify-content-center">
-                <a class="page-link"
+                <a class="page-link"  style="color:inherit"
                    asp-route="forumCategory"
                    asp-route-name="@this.Model.Title"
                    asp-route-page="@(this.Model.CurrentPage - 1 )">Previous</a>
@@ -47,8 +47,8 @@
         @for (int i = 1; i <= Model.PagesCount; i++)
         {
             var active = i == this.Model.CurrentPage ? "active" : string.Empty;
-            <li class="page-item @active">
-                <a class="page-link"
+            <li class="page-item @active" >
+                <a class="page-link" style="color:inherit"
                    asp-route="forumCategory"
                    asp-route-name="@this.Model.Title"
                    asp-route-page="@i">@i</a>
@@ -63,7 +63,7 @@
         else
         {
             <li class="page-item justify-content-center">
-                <a class="page-link"
+                <a class="page-link"  style="color:inherit"
                    asp-route="forumCategory"
                    asp-route-name="@this.Model.Title"
                    asp-route-page="@(this.Model.CurrentPage + 1 )">Next</a>
@@ -74,3 +74,6 @@
 
     </ul>
 </nav>
+<style>
+
+</style>
